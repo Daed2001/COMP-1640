@@ -1,0 +1,17 @@
+<br />
+<b>Warning</b>:  A non-numeric value encountered in <b>/www/wwwroot/206.189.84.57/App/Controllers/Idea.php</b> on line <b>25</b><br />
+<br />
+<b>Warning</b>:  A non-numeric value encountered in <b>/www/wwwroot/206.189.84.57/App/Controllers/Idea.php</b> on line <b>29</b><br />
+<br />
+<b>Warning</b>:  A non-numeric value encountered in <b>/www/wwwroot/206.189.84.57/App/Controllers/Idea.php</b> on line <b>30</b><br />
+<br />
+<b>Fatal error</b>:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-5, 5' at line 5 in /www/wwwroot/206.189.84.57/App/Core/db.php:46
+Stack trace:
+#0 /www/wwwroot/206.189.84.57/App/Core/db.php(46): PDOStatement-&gt;execute()
+#1 /www/wwwroot/206.189.84.57/App/Core/db.php(58): db-&gt;execute()
+#2 /www/wwwroot/206.189.84.57/App/Models/Myideas.php(67): db-&gt;result()
+#3 /www/wwwroot/206.189.84.57/App/Controllers/Idea.php(31): Myideas-&gt;showadmin()
+#4 /www/wwwroot/206.189.84.57/App/Core/App.php(31): Idea-&gt;index()
+#5 /www/wwwroot/206.189.84.57/index.php(3): App-&gt;__construct()
+#6 {main}
+  thrown in <b>/www/wwwroot/206.189.84.57/App/Core/db.php</b> on line <b>46</b><br />

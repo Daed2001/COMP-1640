@@ -1,0 +1,25 @@
+   /* Media for Extra small device */
+@media (max-width: 600px) {
+.card{
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.col-md-12.d-flex.justify-content-between.pt-2 {
+    padding: 0 !important;
+    
+}
+.col-md-12.pe-5.d-flex.align-items-center.justify-content-between {
+    margin-bottom: 12px;
+    margin-top: 1rem;
+}
+}
+@media (min-width: 576px) {
+    .modal-dialog.modal-xl.modal-idea-post {
+    max-width: 83%;
+    margin: 1.75rem auto;
+    }
+
+    .container, .container-lg, .container-md, .container-sm, .container-xl {
+        max-width: 71%;
+    }
+}
