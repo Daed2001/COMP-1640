@@ -77,9 +77,9 @@
             }
         }
         
-        public function categorycheckupdate($data){
-            $this->query("SELECT * FROM category WHERE (categoryid=:categoryid AND categoryname!=:categoryname)");
-             $this->bind(':categoryid', $data['categoryid']);
+        public function categorycheckupdate($data){     
+            $this->query("SELECT * FROM category WHERE (categoryId!=:categoryId AND categoryname=:categoryname)");
+             $this->bind(':categoryId', $data['categoryId']);
              $this->bind(':categoryname', $data['categoryname']);
              if($this->column() > 0) {
                 return true;

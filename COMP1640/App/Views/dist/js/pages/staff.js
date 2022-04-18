@@ -22,9 +22,11 @@ $(document).on("click","#btn-add",function(e) {
                 }
                 else if(dataResult.statusCode==201){
                    alert('Please fill in !');
-                } else if (dataResult.statusCode=='staffcheck') {
-                    alert('Staff already exist !');
-                }       
+                } else if (dataResult.statusCode=='usercheck') {
+                    alert('Staff username already exist !');
+                }else if (dataResult.statusCode=='emailcheck') {
+                    alert('Staff email already exist !');
+                }           
         }
     });
 });
@@ -69,9 +71,11 @@ $(document).on('click','#update',function(e) {
                     }
                     else if(dataResult.statusCode==201){
                        alert('Please fill in !');
-                    } else if (dataResult.statusCode=='staffcheck') {
-                        alert('Staff already exist !');
-                    }    
+                    } else if (dataResult.statusCode=='staffcheckusername') {
+                        alert('Staff username already exist !');
+                    } else if (dataResult.statusCode=='staffcheckemail') {
+                        alert('Staff email already exist !');
+                    } 
                     
                 
         },

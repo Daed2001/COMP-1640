@@ -13,12 +13,10 @@ class Comment extends Controller
             ];
             if(empty($data['Content'])){
                 $response['status'] = "Comment is empty";
-
                 echo json_encode($response);
     
             }else{
                 $this->model("Comments")->add($data);
-                $response['status'] = "Add comment success fully";
                 $response['comment'] = 
                  '<div class="media mb-4" style="color:black">
                     <img class="rounded-circle border align-self-start mr-3" style="width: 40px; height: 40px;" id="img-user"  src="/App/Views/dist/img/user2-160x160.jpg" alt="">

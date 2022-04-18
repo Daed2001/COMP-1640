@@ -87,60 +87,77 @@ class Myidea extends Controller
                     echo json_encode(array("statusCode" => 'closuredate'));
                 }
                 else if (isset($_FILES['imgpost']['name'])) {
-                        $allowed = array('jpeg', 'png', 'jpg');
+                        // image
+                        $allowed = array('jpeg', 'png', 'jpg','gif');
                         $ext = pathinfo($image, PATHINFO_EXTENSION);
+                        //file
+                        $extfile = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+                        $valid_ext = array("zip","rar","docx","pdf","doc");
                         if (!in_array($ext, $allowed)) {
-                            return "Sorry, only JPG, JPEG, PNG & GIF  files are allowed.";
+                            echo json_encode(array("statusCode" =>  "errimage"));
+                        }elseif(isset($_FILES['package']['name']))
+                        { if(!in_array($extfile, $valid_ext)){
+                            echo json_encode(array("statusCode" => "errfile"));
+                        }}else{
+                            if (file_exists($pathimg)) {
+                                if(file_exists($pathfile)){
+                                    $this->model("Myideas")->create($data);
+                                    $this->sendmailctrl($data);
+                                    echo json_encode(array("statusCode" => 200));
+                                }
+                                elseif(!file_exists($pathfile)){
+                                    move_uploaded_file($_FILES['package']['tmp_name'], $pathfile);
+                                    $this->model("Myideas")->create($data);
+                                    $this->sendmailctrl($data);
+                                    echo json_encode(array("statusCode" => 200));
+                                }
+                            }elseif(!file_exists($pathimg)){
+                                if(file_exists($pathfile)){
+                                    move_uploaded_file($_FILES['imgpost']['tmp_name'], $pathimg);
+                                    $this->model("Myideas")->create($data);
+                                    $this->sendmailctrl($data);
+                                    echo json_encode(array("statusCode" => 200));
+                                }
+                                elseif(!file_exists($pathfile)){
+                                    move_uploaded_file($_FILES['imgpost']['tmp_name'], $pathimg);
+                                    move_uploaded_file($_FILES['package']['tmp_name'], $pathfile);
+                                    $this->model("Myideas")->create($data);
+                                    $this->sendmailctrl($data);
+                                    echo json_encode(array("statusCode" => 200));
+                                }
+                            }
                         }
-                        if (file_exists($pathimg)) {
-                            if(file_exists($pathfile)){
-                                $this->model("Myideas")->create($data);
-                                $this->sendmailctrl($data);
-                                echo json_encode(array("statusCode" => 200));
-                            }
-                            elseif(!file_exists($pathfile)){
-                                move_uploaded_file($_FILES['package']['tmp_name'], $pathfile);
-                                $this->model("Myideas")->create($data);
-                                $this->sendmailctrl($data);
-                                echo json_encode(array("statusCode" => 200));
-                            }
-                        }elseif(!file_exists($pathimg)){
-                            if(file_exists($pathfile)){
-                                move_uploaded_file($_FILES['imgpost']['tmp_name'], $pathimg);
-                                $this->model("Myideas")->create($data);
-                                $this->sendmailctrl($data);
-                                echo json_encode(array("statusCode" => 200));
-                            }
-                            elseif(!file_exists($pathfile)){
-                                move_uploaded_file($_FILES['imgpost']['tmp_name'], $pathimg);
-                                move_uploaded_file($_FILES['package']['tmp_name'], $pathfile);
-                                $this->model("Myideas")->create($data);
-                                $this->sendmailctrl($data);
-                                echo json_encode(array("statusCode" => 200));
-                            }
-                        }
+                        
                       
                 }elseif(isset($_FILES['package']['name'])){
-                    if(file_exists($pathfile)){
-                        $this->model("Myideas")->create($data);
-                        $this->sendmailctrl($data);
-                        echo json_encode(array("statusCode" => 200));
-                    }
-                    elseif(!file_exists($pathfile)){
-                        move_uploaded_file($_FILES['package']['tmp_name'], $pathfile);
-                        $this->model("Myideas")->create($data);
-                        $this->sendmailctrl($data);
-                        echo json_encode(array("statusCode" => 200));
-                    }
-                }
-                else{
-                        $this->model("Myideas")->create($data);
-                        echo json_encode(array("statusCode" => 200));
-                    }
+                    $extfile = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+                    $valid_ext = array("zip","rar","docx","pdf","doc");
+                    if(!in_array($extfile, $valid_ext)){
+                        echo json_encode(array("statusCode" => "errfile"));
+                    }else{
+                            if(file_exists($pathfile)){
+                                $this->model("Myideas")->create($data);
+                                $this->sendmailctrl($data);
+                                echo json_encode(array("statusCode" => 200));
+                            }
+                            elseif(!file_exists($pathfile)){
+                                move_uploaded_file($_FILES['package']['tmp_name'], $pathfile);
+                                $this->model("Myideas")->create($data);
+                                $this->sendmailctrl($data);
+                                echo json_encode(array("statusCode" => 200));
+                            }
+                        }
+                        }
+                    else{
+                            $this->model("Myideas")->create($data);
+                            echo json_encode(array("statusCode" => 200));
+                            $this->sendmailctrl($data);
+                        }
 
             }
         }
     }
+
 
 
     function uploadfile ($countfiles,$folderfile){
@@ -259,8 +276,10 @@ class Myidea extends Controller
     public function sendmailctrl($data)
     {
         include("./App/Views/plugins/PHPMailer/sendmail.php");
-        $subject = 'User '.$_SESSION['username'].' has post a new idea '.$data['titlename'];
-        $body = "New ideal udate success";
+        $subject = "Hello user ".$_SESSION['username']." has post a new idea: ".$data['titlename'];
+        $body = "New ideal create success <br>
+                Content: ".$data['content']."<br>
+                Create at: ".$data['createAt']."<br>";
         $receive= $this->model("User")->GetQAforuser();
         sendmails($subject,$body,$receive);
        

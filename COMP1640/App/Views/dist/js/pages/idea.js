@@ -68,7 +68,11 @@ $(document).on("click", ".add-comment", function(e) {
       success: function(response) {
           console.log(response.comment);
           $("#" + cs).prepend(response.comment);
-          alert(response.status);
+          if(response.status){
+             alert(response.status);
+          }
+          $(".comment-input").val('');
+         
       }
 
   });

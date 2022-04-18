@@ -90,9 +90,18 @@ class Staffs extends db {
     
         }
 
-        public function staffcheck($data){
-            $this->query("SELECT * FROM user WHERE username=:username OR email=:email");
+        public function staffcheckusernamecre($data){
+            $this->query("SELECT * FROM user WHERE username=:username");
             $this->bind(':username', $data['username']);
+            if($this->column() > 0) {
+               return true;
+           } else {
+               return false;
+           }
+        } 
+
+        public function staffcheckemailcre($data){
+            $this->query("SELECT * FROM user WHERE email=:email");
             $this->bind(':email', $data['email']);
             if($this->column() > 0) {
                return true;
@@ -100,9 +109,21 @@ class Staffs extends db {
                return false;
            }
         } 
-        public function staffcheckupdate($data){
-            $this->query("SELECT * FROM user WHERE (username=:username AND email!=:email)");
+        public function staffcheckusername($data){
+            $this->query("SELECT * FROM user WHERE (userId !=:userId  AND username=:username)");
+            $this->bind(':userId', $data['userId']);
             $this->bind(':username', $data['username']);
+             if($this->column() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+            
+        }
+
+        public function staffcheckemail($data){
+            $this->query("SELECT * FROM user WHERE (userId !=:userId  AND email=:email)");
+            $this->bind(':userId', $data['userId']);
             $this->bind(':email', $data['email']);
              if($this->column() > 0) {
                 return true;

@@ -85,8 +85,7 @@ class User extends db {
 
 
     public function GetQAforuser(){
-        $userdepartmentid = $_SESSION['departmentid'];
-        $this->query("SELECT email, fullname FROM `user` WHERE `roleId` = 2 AND `departmentId` = $userdepartmentid");
+        $this->query("SELECT * FROM user WHERE roleId = 2");
         $show = $this->result();
         return $show;
     }

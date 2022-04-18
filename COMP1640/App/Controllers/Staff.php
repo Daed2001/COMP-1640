@@ -54,9 +54,11 @@ class Staff extends Controller {
 
             if (empty($data['username']) || empty($data['password'])) {
                 echo json_encode(array("statusCode" => 201));
-            } else if ($this->model("Staffs")->staffcheck($data)) {
-                echo json_encode(array("statusCode" => 'staffcheck'));
-            } else {
+            } else if ($this->model("Staffs")->staffcheckusernamecre($data)) {
+                echo json_encode(array("statusCode" => 'usercheck'));
+            } elseif($this->model("Staffs")->staffcheckemailcre($data)){
+                echo json_encode(array("statusCode" => 'emailcheck'));
+            } else  {
                 $this->model("Staffs")->create($data);
                 echo json_encode(array("statusCode" => 200));
             }
@@ -88,8 +90,11 @@ class Staff extends Controller {
 
             if (empty($data['username']) || empty($data['email'])) {
                 echo json_encode(array("statusCode" => 201));
-            } else if ($this->model("Staffs")->staffcheckupdate($data)) {
-                echo json_encode(array("statusCode" => 'staffcheck'));
+            }else if($this->model("Staffs")->staffcheckemail($data)){
+                echo json_encode(array("statusCode" => 'staffcheckemail'));
+
+            } else if ($this->model("Staffs")->staffcheckusername($data)) {
+                echo json_encode(array("statusCode" => 'staffcheckusername'));
             } else {
                 $this->model("Staffs")->update($data);
                 echo json_encode(array("statusCode" => 200));

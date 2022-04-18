@@ -88,7 +88,7 @@ class Submissions extends db {
        }
     } 
     public function submissioncheckupdate($data){
-        $this->query("SELECT * FROM submission WHERE (submissionId=:submissionId AND submissionname!=:submissionname)");
+        $this->query("SELECT * FROM submission WHERE (submissionId!=:submissionId AND submissionname=:submissionname)");
          $this->bind(':submissionId', $data['submissionId']);
          $this->bind(':submissionname', $data['submissionname']);
          if($this->column() > 0) {

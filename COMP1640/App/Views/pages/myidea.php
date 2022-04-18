@@ -127,8 +127,32 @@ require APPROOT . '/Views/includes/navigation.php';
         </div>
     </div>
 </div>
+<!-- Term of Conditions -->
+<div id="ToC" class="modal fade" style=" z-index: 100001;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form>
+				<div class="modal-header">						
+					<h4 class="modal-title">Terms And Conditions</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				</div>
+				<div class="modal-body">					
+					<div class="form-group">
+                    <p><b>*</b>All content will be public into QA Idea List</p>
+                    <p><b>*</b>Your idea must relative to category or department</p>
+                    <p><b>*</b>Your post must giving a good point of view base on the idea</p>
+					</div>			
+				</div>
+				<div class="modal-footer">
+	
+					<input type="button" class="btn btn-secondary" data-dismiss="modal" value="Close">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
 <!-- Add Modal HTML -->
-<div class="modal fade" id="addIdeaModal" tabindex="-1">
+<div class="modal fade" id="addIdeaModal" tabindex="-1"  style=" z-index: 100000">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <form>
@@ -160,15 +184,16 @@ require APPROOT . '/Views/includes/navigation.php';
                                
                             </div>
                             <div class="uploadfilebox d-flex" style="width:100%;">
-                                <div class="custom-file col-lg-6">
-                                    <input type="file" class="custom-file-input" name="img-post" id="select_post_img"
+                                <div class="custom-file col-lg-6 mb-3">
+                                   <label for="select_post_img">Choose picture</label>
+                                        <input type="file" class="form-control-file border rounded"  name="img-post" id="select_post_img"
                                         aria-describedby="inputGroupFileAddon01">
-                                    <label class="custom-file-label" for="select_post_img">Choose picture</label>
+                                
                                 </div>
-                                    <div class="custom-file col-lg-6">
-                                        <input type="file" class="custom-file-input" name="file-post[]" id="select_post_file"
-                                            aria-describedby="inputGroupFileAddon01">
-                                        <label class="custom-file-label" for="select_post_file">Choose File Upload</label>
+                                    <div class="custom-file col-lg-6 mb-3">
+                                     <label for="select_post_file">Choose File</label>
+                                    <input type="file" class="form-control-file border rounded" name="file-post[]" id="select_post_file" aria-describedby="inputGroupFileAddon01">
+                                    
                                     </div>
                                 
                             </div>
@@ -191,7 +216,7 @@ require APPROOT . '/Views/includes/navigation.php';
 
                                 <div class="term-check d-flex">
                                     <input class="mt-2 me-1" type="checkbox" id="term" name="term" '>
-                                       <label for="tearms_conditions">&nbsp; Agreed Tearms and Conditions</label>
+                                       <a data-toggle="modal" href="#ToC" for="tearms_conditions">&nbsp; Agreed Terms and Conditions</a>
                                        <br>
                                     </div>
 
@@ -253,7 +278,7 @@ require APPROOT . '/Views/includes/navigation.php';
                                  <input type="hidden" id="id_u" name="id" class="form-control" required>	
                                  <input id="titlepost_u" name="title-post" type="text" required="required" class="form-control" placeholder="Title" aria-label="Username" aria-describedby="basic-addon1">
                                 
-                                <div class="card" id="img_postt" style="width:100%;">
+                                <div class="card" id="img_posttu" style="width:100%;">
                                 <div class="card-header"> <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                                         <i class="fas fa-minus"></i>
                                         </button></div>
@@ -269,15 +294,20 @@ require APPROOT . '/Views/includes/navigation.php';
                             </div>
                              
                                 </div>
-                            <div class="uploadfilebox d-flex" style="width:100%;">
-                                <div class="custom-file col-lg-6">
-                                   <input type="file" class="custom-file-input" name="img-post" id="select_post_img_u" aria-describedby="inputGroupFileAddon01">
-                                   <label class="custom-file-label" for="select_post_img">Choose picture</label>
+                                <div class="col-md-12 mb-3">
+                            <textarea id="textpost_u" class="form-control" name="text-post" aria-label="With textarea"
+                                placeholder="Say something"></textarea>
+                        </div>
+                            <div class="uploadfilebox mb-3 d-flex" style="width:100%;">
+                                    <div class="custom-file mb-3 col-lg-6">
+                                   <label for="select_post_img">Choose picture</label>
+                                        <input type="file" class="form-control-file border rounded"  name="img-post" id="select_post_img_u"
+                                        aria-describedby="inputGroupFileAddon01">
                                 </div>
-                                    <div class="custom-file col-lg-6">
-                                        <input type="file" class="custom-file-input" name="file-post" id="select_post_file"
-                                            aria-describedby="inputGroupFileAddon01">
-                                        <label class="custom-file-label" for="select_post_file">Choose File Upload</label>
+                                    <div class="custom-file mb-3 col-lg-6">
+                                     <label for="select_post_file">Choose File</label>
+                                    <input type="file" class="form-control-file border rounded" name="file-post[]" id="select_post_file" aria-describedby="inputGroupFileAddon01">
+                                    
                                     </div>
                                 
                             </div>

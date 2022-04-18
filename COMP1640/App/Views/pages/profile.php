@@ -24,6 +24,8 @@ $(document).on('click','#update',function(e) {
                 if(dataResult.statusCode==200){
                     alert('Data update successfully !'); 
                     location.reload();						
+                }else if(dataResult.statusCode=='staffcheck'){
+                  alert('Email already exist !'); 
                 }
                 else if(dataResult.statusCode==201){
                     alert('Please fill in !');

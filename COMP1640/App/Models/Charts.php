@@ -25,4 +25,36 @@ class Charts extends db
         return $show;
     }
 
+    public function noidea(){
+        $this->query('SELECT * FROM idea WHERE ideaId NOT IN (SELECT DISTINCT(ideaId) FROM reaction)');
+        $show = $this->result();
+        return $show;
+    }
+    public function noideacount(){
+        $this->query('SELECT COUNT(*) as cnt FROM idea WHERE ideaId NOT IN (SELECT DISTINCT(ideaId) FROM reaction)');
+        $show = $this->result();
+        return $show;
+    }
+    public function anonyideacount(){
+        $this->query('SELECT COUNT(*) as cnt FROM idea WHERE Anonymous = 1');
+        $show = $this->result();
+        return $show;
+    }
+    public function anonycommentcount(){
+        $this->query('SELECT COUNT(*) as cnt FROM comment WHERE Anonymous = 1');
+        $show = $this->result();
+        return $show;
+    }
+    
+    public function anonyidea(){
+        $this->query('SELECT * FROM idea WHERE Anonymous = 1');
+        $show = $this->result();
+        return $show;
+    }
+    public function anonycomment(){
+        $this->query('SELECT * FROM comment WHERE Anonymous = 1');
+        $show = $this->result();
+        return $show;
+    }
+
 }

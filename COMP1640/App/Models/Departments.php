@@ -75,7 +75,7 @@ class Departments extends db {
         }
 
            public function departmentcheckupdate($data){
-            $this->query("SELECT * FROM department WHERE (departmentId=:departmentId AND departmentname!=:departmentname)");
+            $this->query("SELECT * FROM department WHERE (departmentId!=:departmentId AND departmentname=:departmentname)");
              $this->bind(':departmentId', $data['departmentId']);
              $this->bind(':departmentname', $data['departmentname']);
              if($this->column() > 0) {

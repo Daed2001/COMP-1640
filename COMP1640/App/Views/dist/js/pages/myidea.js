@@ -14,8 +14,12 @@ function preview(){
         var image = document.querySelector('#post_img');
         var imagepost= document.querySelector('#img_postt');
         image.setAttribute('src',image_src);
-        imagepost.setAttribute('style','display: block; width:100%;');
+        imagepost.setAttribute('style','display: block; width:100%;');  
+
+  
     }
+
+
 }
 
 // var input = document.querySelector("#select_post_file");
@@ -47,10 +51,10 @@ function preview_u(){
     filereader_u.readAsDataURL(fileobject_u);
 
     filereader_u.onload = function(){
-        var image_src = filereader_u.result;
-        var image = document.querySelector('#post_img_u');
-        image.setAttribute('src',image_src);
-        image.setAttribute('style','display:');
+        var image_src_u = filereader_u.result;
+        var image_u = document.querySelector('#post_img_u');
+        image_u.setAttribute('src',image_src_u);
+        image_u.setAttribute('style','display:');
         $('#post_img_ud').remove();
     }
 }
@@ -81,10 +85,12 @@ $(document).on("click","#btn-add",function(e) {
                 console.log(dataResult);
                 if(dataResult.statusCode==200){
                     $('#addIdeaModal').modal('hide');
-                    alert('Hi');
                     alert('Data added successfully !'); 
-                    alert('You should check your mail right now !'); 
                     location.reload();		
+                }else if(dataResult.statusCode=="errimage"){
+                    alert("Sorry picture not allowed, only JPG, JPEG, PNG & GIF are allowed.")
+                }else if(dataResult.statusCode=="errfile"){
+                    alert("Sorry file not allowed, only zip, rar, docx, pdf & doc are allowed.")
                 }
                 else if(dataResult.statusCode==201){
                     alert('Please fill in !');
@@ -262,7 +268,10 @@ $(document).on("click", ".add-comment", function(e) {
         success: function(response) {
             console.log(response.comment);
             $("#" + cs).prepend(response.comment);
-            alert(response.status);
+            if(response.status){
+                alert(response.status);
+            }
+           
         }
  
     });

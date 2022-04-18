@@ -69,6 +69,8 @@ class Users extends Controller {
             }
             if(empty($data['email']) || empty($data['fullname'])) {
                 echo json_encode(array("statusCode"=>201));
+            } if ($this->model("Staffs")->staffcheckemail($data)) {
+                echo json_encode(array("statusCode" => 'staffcheck'));
             } else {
                 $this->model("Staffs")->update($data);
                 echo json_encode(array("statusCode"=>200));

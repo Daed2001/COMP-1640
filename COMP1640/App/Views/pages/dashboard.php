@@ -76,6 +76,76 @@
         
         <!-- /.card-footer-->
       </div>
+
+
+
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Number of Idea without comment : <?php echo $data['noideacount'][0]['cnt'] ?></h3>
+       
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+              <i class="fas fa-minus"></i>
+            </button>
+            </button>
+          </div>
+        </div>
+        <div class="card-body">
+        <table class="table table-striped table-hover">
+				<thead>
+					<tr>
+						<th>Idea name</th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- In kết quả -->
+			<?php foreach ($data['noidea'] as $row) {
+				?>
+				<tr>
+
+						<td><?php echo $row["Title"]?> </td>
+					</tr> 
+			<?php }?>
+				</tbody>
+			</table></canvas>
+          </div>
+        </div>
+        <!-- /.card-body -->
+       
+        <!-- /.card-footer-->
+
+        <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Anonymous Ideas and Comments</h3>
+       
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+              <i class="fas fa-minus"></i>
+            </button>
+            </button>
+          </div>
+        </div>
+        <div class="card-body">
+        <table class="table table-striped table-hover">
+				<thead>
+					<tr>
+						<th>Anonymous Idea : <?php echo $data['anonyideacount'][0]['cnt']?></th>
+            <th>Anoynymous Comment : <?php echo $data['anonycommentcount'][0]['cnt']?></th>
+					</tr>
+				</thead>
+				<tbody>
+        <?php foreach ($data['anonycomment'] as $row => $value) {
+				?>
+				<tr>
+						<td><?php echo $data['anonyidea'][$row]["Title"]?> </td>
+            <td><?php echo $data['anonycomment'][$row]["Content"]?> </td>
+					</tr> 
+			<?php }?>
+				</tbody>
+			</table></canvas>
+          </div>
+        </div>
+      </div>
     </section>
     <!-- /.content -->
   </div>
